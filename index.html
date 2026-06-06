@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayşe'ye Özel ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff0844 0%, #ff6b8b 50%, #ffb6c1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Kalp Yağmuru */
+        .Heart-Rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .Heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            animation: HeartFall linear infinite;
+            text-shadow: 0 0 10px rgba(255, 0, 100, 0.8);
+        }
+        
+        @keyframes HeartFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Ana Container */
+        .Container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+                        0 0 0 2px rgba(255, 255, 255, 0.3) inset,
+                        0 0 30px rgba(255, 0, 100, 0.5);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            animation: ContainerGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes ContainerGlow {
+            0%, 100% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.3) inset, 0 0 30px rgba(255, 0, 100, 0.5); }
+            50% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.5) inset, 0 0 50px rgba(255, 0, 200, 0.8); }
+        }
+        
+        /* Soru Kısmı */
+        .Question-Box {
+            margin-bottom: 30px;
+        }
+        
+        .Question {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-family: 'Pacifico', cursive;
+            animation: QuestionPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes QuestionPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Buton Container */
+        .Button-Container {
+            position: relative;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        /* Evet Butonu */
+        .Yes-Btn {
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0066, #ff3366);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 0, 102, 0.5), 0 0 20px #ff0066;
+            transition: 0.3s;
+            position: relative;
+            z-index: 20;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .Yes-Btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 0, 102, 0.8), 0 0 30px #ff0066;
+        }
+        
+        /* Hayır Butonu (Kaçan) */
+        .No-Btn {
+            padding: 15px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #666, #999);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.1s ease;
+            position: absolute;
+            left: 60%;
+            z-index: 25;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* İkinci Ekran */
+        .Second-Screen {
+            display: none;
+        }
+        
+        .Second-Screen.Active {
+            display: block;
+            animation: ScreenAppear 0.8s ease;
+        }
+        
+        @keyframes ScreenAppear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Neon Yazı */
+        .Neon-Text {
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de;
+            margin: 30px 0;
+            font-family: 'Pacifico', cursive;
+            letter-spacing: 3px;
+            animation: NeonFlicker 2s infinite;
+        }
+        
+        @keyframes NeonFlicker {
+            0%, 100% { text-shadow: 0 0 10px #ff00de, 0 0 20px #ff00de, 0 0 30px #ff00de, 0 0 40px #ff00de; }
+            25% { text-shadow: 0 0 5px #ff00de, 0 0 15px #ff00de, 0 0 25px #ff00de, 0 0 35px #ff00de; }
+            50% { text-shadow: 0 0 15px #ff00de, 0 0 25px #ff00de, 0 0 35px #ff00de, 0 0 45px #ff00de; }
+            75% { text-shadow: 0 0 8px #ff00de, 0 0 18px #ff00de, 0 0 28px #ff00de, 0 0 38px #ff00de; }
+        }
+        
+        /* Gamze Yazısı */
+        .Gamze-Text {
+            font-size: 64px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff0066, #ffcc00, #ff0066, #ff00cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255,0,102,0.5);
+            margin: 20px 0;
+            font-family: 'Pacifico', cursive;
+            line-height: 1.3;
+            animation: TextShake 0.5s infinite;
+        }
+        
+        @keyframes TextShake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(5px) rotate(1deg); }
+            75% { transform: translateX(-5px) rotate(-1deg); }
+        }
+        
+        /* Alt Metin */
+        .Gift-Text {
+            font-size: 24px;
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            margin: 20px 0;
+            font-weight: 400;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+        
+        /* Seni Seviyorum Butonu */
+        .Love-Btn {
+            padding: 20px 50px;
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0066, #ff3366, #ff0066);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 0, 102, 0.7), 0 0 30px #ff0066;
+            margin: 30px 0;
+            animation: LoveBtnPulse 1s infinite;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        @keyframes LoveBtnPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 15px 40px rgba(255, 0, 102, 0.9), 0 0 50px #ff0066; }
+        }
+        
+        /* Patlama Efekti */
+        .Explosion-Container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .Explosion-Heart {
+            position: absolute;
+            font-size: 40px;
+            animation: Explode 2s forwards;
+        }
+        
+        @keyframes Explode {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: scale(3) rotate(180deg); opacity: 0.8; }
+            100% { transform: scale(5) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Kalp Patlaması */
+        .Heart-Explosion {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            color: #ff0066;
+            text-shadow: 0 0 30px #ff0066, 0 0 60px #ff0066;
+            animation: HeartExplode 2s forwards;
+            z-index: 10000;
+        }
+        
+        @keyframes HeartExplode {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(3); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .Question { font-size: 32px; }
+            .Neon-Text { font-size: 32px; }
+            .Gamze-Text { font-size: 40px; }
+            .Yes-Btn, .No-Btn { padding: 12px 25px; font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Kalp Yağmuru -->
+    <div class="Heart-Rain" id="HeartRain"></div>
+    
+    <!-- Patlama Container -->
+    <div class="Explosion-Container" id="ExplosionContainer"></div>
+    
+    <!-- Ana Container -->
+    <div class="Container" id="MainContainer">
+        <!-- Birinci Ekran (Soru) -->
+        <div class="First-Screen" id="FirstScreen">
+            <div class="Question-Box">
+                <div class="Question">Bana Kırgın Mısın Ayşe'm?</div>
+            </div>
+            
+            <div class="Button-Container" id="ButtonContainer">
+                <button class="Yes-Btn" id="YesBtn" onclick="goToSecondScreen()">Hayır 💔</button>
+                <button class="No-Btn" id="NoBtn" onmouseover="moveButton()" onclick="forceYes()">Evet ❣️</button>
+            </div>
+        </div>
+        
+        <!-- İkinci Ekran (Hediye) -->
+        <div class="Second-Screen" id="SecondScreen">
+            <div class="Gift-Text">Bu Sana Ufakta Olsa Hediyem Umarım Kırgınlığımız Geçmiştir ❤️</div>
+            
+            <div class="Neon-Text">❤️ Ayşe'm ❤️</div>
+            
+            <div class="Gamze-Text" id="GamzeText">Ayşe'm Seni Çok Seviyorum Yavrummmm ❤️</div>
+            
+            <button class="Love-Btn" id="LoveBtn" onclick="createExplosion()">Bende Seni Seviyorum ❤️</button>
+        </div>
+    </div>
+    
+    <script>
+        // Kalp Yağmuru Oluştur
+        function createHeartRain() {
+            const heartRain = document.getElementById('HeartRain');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'Heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                heartRain.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 200);
+        }
+        
+        // Hayır Butonunu Kaçır
+        function moveButton() {
+            const noBtn = document.getElementById('NoBtn');
+            const container = document.getElementById('ButtonContainer');
+            
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            const maxX = containerRect.width - btnRect.width;
+            const maxY = containerRect.height - btnRect.height;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+        
+        // Zorla Evet Dedirt
+        function forceYes() {
+            alert('Görüyor Musun Ayşe\'m Kaçış Yok! Hayır Demek Zorundasın! ❤️');
+            goToSecondScreen();
+        }
+        
+        // İkinci Ekrana Geç
+        function goToSecondScreen() {
+            document.getElementById('FirstScreen').style.display = 'none';
+            document.getElementById('SecondScreen').classList.add('Active');
+            
+            // Kalp yağmurunu hızlandır
+            createHeartRain();
+        }
+        
+        // Patlama Efekti
+        function createExplosion() {
+            const explosionContainer = document.getElementById('ExplosionContainer');
+            
+            // Büyük Kalp Patlaması
+            const bigHeart = document.createElement('div');
+            bigHeart.className = 'Heart-Explosion';
+            bigHeart.innerHTML = '❤️';
+            explosionContainer.appendChild(bigHeart);
+            
+            // Küçük Kalp Patlamaları
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'Explosion-Heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = Math.random() * 100 + '%';
+                    heart.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                    heart.style.animation = 'Explode ' + (Math.random() * 1 + 1) + 's forwards';
+                    explosionContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 2000);
+                }, i * 50);
+            }
+            
+            // Gamze Yazısını Titret
+            const gamzeText = document.getElementById('GamzeText');
+            gamzeText.style.animation = 'TextShake 0.1s infinite';
+            
+            setTimeout(() => {
+                gamzeText.style.animation = 'TextShake 0.5s infinite';
+            }, 2000);
+            
+            setTimeout(() => {
+                bigHeart.remove();
+            }, 2000);
+            
+            // Butonu Patlat
+            const loveBtn = document.getElementById('LoveBtn');
+            loveBtn.style.animation = 'LoveBtnPulse 0.1s infinite';
+            
+            setTimeout(() => {
+                loveBtn.style.animation = 'LoveBtnPulse 1s infinite';
+            }, 2000);
+        }
+        
+        // Sayfa Yüklendiğinde
+        window.onload = function() {
+            createHeartRain();
+            
+            // Hayır butonunu başlangıç pozisyonuna koy
+            const noBtn = document.getElementById('NoBtn');
+            noBtn.style.left = '60%';
+            noBtn.style.top = '0';
+        };
+        
+        // Ekran boyutu değişince hayır butonunu resetle
+        window.onresize = function() {
+            const noBtn = document.getElementById('NoBtn');
+            noBtn.style.left = '60%';
+            noBtn.style.top = '0';
+        };
+    </script>
+</body>
+</html>
