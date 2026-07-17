@@ -1,2 +1,0 @@
-# log-api-infazsiz
-public
